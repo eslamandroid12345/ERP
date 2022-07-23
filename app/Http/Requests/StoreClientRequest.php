@@ -13,7 +13,7 @@ class StoreClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,23 @@ class StoreClientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'name' => 'required',
+            'email' => 'required|unique:clients,email',
+            'address' => 'required'
+        ];
+
+    }
+
+    public function messages()
+    {
+        return [
+
+            'name.required' => 'The name of client is required',
+            'email.required' => 'The email of client is required',
+            'email.unique' => 'This email already exists please create another email',
+            'address.required' => 'The address of client is required',
+
         ];
     }
 }

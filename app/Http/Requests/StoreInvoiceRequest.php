@@ -13,7 +13,7 @@ class StoreInvoiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,33 @@ class StoreInvoiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'invoice_number' => 'required',
+            'invoice_date' => 'required',
+            'client_id' => 'required|exists:clients,id',
+            'product_name' => 'required',
+            'quantity' => 'required',
+            'total_amount' => 'required',
+            'total_paid' => 'required'
+
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+
+
+            'invoice_number.required' => 'The invoice number is required',
+            'invoice_date.required' => 'The invoice date is required',
+            'client_id.required' => 'The client of invoice is required',
+            'client_id.exists' => 'This client not exists',
+            'product_name.required' => 'Product name is required',
+            'quantity.required' => 'quantity of product is required',
+            'total_amount.required' => 'total amount of product is required',
+            'total_paid.required' => 'total paid of invoice is required'
+
         ];
     }
 }

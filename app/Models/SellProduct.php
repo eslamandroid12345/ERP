@@ -5,16 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class SellProduct extends Model
 {
     use HasFactory;
 
     protected $fillable = [
 
+        'invoice_id',
         'product_name',
-        'sell_price',
-
+        'quantity',
+        'total_amount',
     ];
+
+
+    public function invoice(){
+
+
+        return $this->belongsTo(Invoice::class,'invoice_id','id');
+    }
+
 
 
 }

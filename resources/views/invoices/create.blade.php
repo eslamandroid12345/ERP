@@ -44,7 +44,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('store')}}" method="post"
+                    <form action="{{route('invoices.store')}}" method="post"
                           autocomplete="off">
                         {{ csrf_field() }}
                         {{-- 1 --}}
@@ -53,13 +53,18 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">رقم الفاتورة</label>
                                 <input type="text" class="form-control" id="inputName" name="invoice_number"
-                                       title="يرجي ادخال رقم الفاتورة" required>
+                                       title="يرجي ادخال رقم الفاتورة" >
+
+                                <span class="text-danger"> @error('invoice_number') {{$message}} @enderror</span>
+
                             </div>
 
                             <div  class="col-lg-6 col-md-6 col-sm-12 mt-3">
                                 <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="invoice_date"
-                                       type="date" required>
+                                <input class="form-control" name="invoice_date"
+                                       type="date">
+                                <span class="text-danger"> @error('invoice_date') {{$message}} @enderror</span>
+
                             </div>
 
 
@@ -82,6 +87,8 @@
                                     @endforeach
 
                                 </select>
+                                <span class="text-danger"> @error('client_id') {{$message}} @enderror</span>
+
                             </div>
 
 
@@ -93,19 +100,23 @@
                                     <div class="form-group">
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="product[]" value="{{$product->id}}" id="defaultCheck1">
+                                            <input data-id="{{ $product->id }}"  class="form-check-input ingredient-enable" type="checkbox" name="product_name[]" value="{{$product->product_name}}" id="defaultCheck1">
                                             <label class="form-check-label" for="defaultCheck1">{{$product->product_name}}</label>
+                                            <span class="text-danger"> @error('product_name') {{$message}} @enderror</span>
+
                                         </div>
                                         <div>
-                                            <input class="form-control" type="number" name="quantity[]">
-                                            <input class="form-control" type="number" name="total_amount[]">
+                                            <input  class="ingredient-amount form-control"  data-id="{{ $product->id }}" type="number" name="quantity[]" disabled placeholder="كميه المنتج"><br>
+                                            <span class="text-danger"> @error('quantity') {{$message}} @enderror</span>
+
+                                            <input class="form-control" type="number" name="total_amount[]" placeholder="الاجمالي" disabled>
+                                            <span class="text-danger"> @error('total_amount') {{$message}} @enderror</span>
 
                                         </div>
 
                                     </div>
                                 @endforeach
 
-                                <span class="text-danger"> @error('permissions') {{$message}} @enderror</span>
 
                             </div>
 
@@ -118,10 +129,11 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">الاجمالي</label>
-                                <input type="number" class="form-control form-control-lg" id="Amount_Commission"
-                                       name="total_paid"
+                                <input type="number" class="form-control form-control-lg" disabled
+                                       name="total_paid">
 
-                                       required>
+                                <span class="text-danger"> @error('total_paid') {{$message}} @enderror</span>
+
                             </div>
 
 
@@ -178,6 +190,16 @@
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
+    <script>
+        $('document').ready(function () {
+            $('.ingredient-enable').on('click', function () {
+                let id = $(this).attr('data-id')
+                let enabled = $(this).is(":checked")
+                $('.ingredient-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+                $('.ingredient-amount[data-id="' + id + '"]').val(null)
+            })
+        });
+    </script>
 
 
 @endsection

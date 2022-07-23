@@ -20,7 +20,7 @@
             </div>
         </div>
         <ul class="side-menu">
-            <li class="side-item side-item-category"> اهلا  {{ auth()->user()->name}}</li>
+            <li class="side-item side-item-category"> اهلا  </li>
 
 
             <li class="side-item side-item-category">قسم المنتجات</li>
@@ -35,8 +35,8 @@
                 <ul class="slide-menu">
 
 
-                    <li><a class="slide-item" href="">اضافه منتج جديد</a></li>
-                    <li><a class="slide-item" href="">عرض المنتجات</a></li>
+                    <li><a class="slide-item" href="{{route('products.create')}}">اضافه منتج جديد</a></li>
+                    <li><a class="slide-item" href="{{route('products.index')}}">عرض المنتجات</a></li>
 
 
                 </ul>
@@ -57,8 +57,8 @@
                 <ul class="slide-menu">
 
 
-                    <li><a class="slide-item" href="">اضافه عميل</a></li>
-                    <li><a class="slide-item" href="">عرض العملاء</a></li>
+                    <li><a class="slide-item" href="{{route('clients.create')}}">اضافه عميل</a></li>
+                    <li><a class="slide-item" href="{{route('clients.index')}}">عرض العملاء</a></li>
 
 
                 </ul>
@@ -79,8 +79,8 @@
                 <ul class="slide-menu">
 
 
-                    <li><a class="slide-item" href="">اضافه فاتوره</a></li>
-                    <li><a class="slide-item" href="">عرض الفواتير</a></li>
+                    <li><a class="slide-item" href="{{route('invoices.create')}}">اضافه فاتوره</a></li>
+                    <li><a class="slide-item" href="{{route('invoices.all')}}">عرض الفواتير</a></li>
 
 
                 </ul>

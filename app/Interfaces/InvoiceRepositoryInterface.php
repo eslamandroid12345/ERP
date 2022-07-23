@@ -2,12 +2,15 @@
 
 namespace App\Interfaces;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreInvoiceRequest;
 
 interface InvoiceRepositoryInterface
 {
 
-    public function store(Request $request);
+    public function invoices();
+    public function store(StoreInvoiceRequest $request);
     public function create();
+    public function details($id);
+
 
 }
