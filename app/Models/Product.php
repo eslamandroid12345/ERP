@@ -16,5 +16,10 @@ class Product extends Model
 
     ];
 
+    public function invoice(){
+
+        return $this->belongsToMany(Invoice::class,'sell_products','product_id','invoice_id','id','id')->withPivot(['quantity','total_amount'])->withTimestamps();
+    }
+
 
 }

@@ -100,16 +100,16 @@
                                     <div class="form-group">
 
                                         <div class="form-check">
-                                            <input data-id="{{ $product->id }}"  class="form-check-input ingredient-enable" type="checkbox" name="product_name[]" value="{{$product->product_name}}" id="defaultCheck1">
+                                            <input data-id="{{ $product->id }}"  class="form-check-input ingredient-enable" type="checkbox" name="product[]" value="{{$product->id}}" id="defaultCheck1">
                                             <label class="form-check-label" for="defaultCheck1">{{$product->product_name}}</label>
-                                            <span class="text-danger"> @error('product_name') {{$message}} @enderror</span>
+                                            <span class="text-danger"> @error('product') {{$message}} @enderror</span>
 
                                         </div>
                                         <div>
-                                            <input  class="ingredient-amount form-control"  data-id="{{ $product->id }}" type="number" name="quantity[]" disabled placeholder="كميه المنتج"><br>
+                                            <input  class="ingredient-amount form-control"  data-id="{{ $product->id }}" type="number" name="quantity[]" placeholder="كميه المنتج"><br>
                                             <span class="text-danger"> @error('quantity') {{$message}} @enderror</span>
 
-                                            <input class="form-control" type="number" name="total_amount[]" placeholder="الاجمالي" disabled>
+                                            <input class="form-control" type="number" name="total_amount[]" placeholder="الاجمالي">
                                             <span class="text-danger"> @error('total_amount') {{$message}} @enderror</span>
 
                                         </div>
@@ -129,7 +129,7 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
                                 <label for="inputName" class="control-label">الاجمالي</label>
-                                <input type="number" class="form-control form-control-lg" disabled
+                                <input type="number" class="form-control form-control-lg"
                                        name="total_paid">
 
                                 <span class="text-danger"> @error('total_paid') {{$message}} @enderror</span>
@@ -190,16 +190,16 @@
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
-    <script>
-        $('document').ready(function () {
-            $('.ingredient-enable').on('click', function () {
-                let id = $(this).attr('data-id')
-                let enabled = $(this).is(":checked")
-                $('.ingredient-amount[data-id="' + id + '"]').attr('disabled', !enabled)
-                $('.ingredient-amount[data-id="' + id + '"]').val(null)
-            })
-        });
-    </script>
+{{--    <script>--}}
+{{--        $('document').ready(function () {--}}
+{{--            $('.ingredient-enable').on('click', function () {--}}
+{{--                let id = $(this).attr('data-id')--}}
+{{--                let enabled = $(this).is(":checked")--}}
+{{--                $('.ingredient-amount[data-id="' + id + '"]').attr('disabled', !enabled)--}}
+{{--                $('.ingredient-amount[data-id="' + id + '"]').val(null)--}}
+{{--            })--}}
+{{--        });--}}
+{{--    </script>--}}
 
 
 @endsection

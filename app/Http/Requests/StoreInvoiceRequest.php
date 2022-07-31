@@ -28,7 +28,7 @@ class StoreInvoiceRequest extends FormRequest
             'invoice_number' => 'required',
             'invoice_date' => 'required',
             'client_id' => 'required|exists:clients,id',
-            'product_name' => 'required',
+            'product' => 'required',
             'quantity' => 'required',
             'total_amount' => 'required',
             'total_paid' => 'required'

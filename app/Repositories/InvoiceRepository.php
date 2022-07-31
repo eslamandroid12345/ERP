@@ -38,16 +38,16 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             $sell = Invoice::findOrFail($invoice->id);
 
             $details = [];
-            for($i = 0 ; $i < count($request->product_name) ; $i++){
+            for($i = 0 ; $i < count($request->product) ; $i++){
 
 
-                $details[$i]['product_name'] = $request->product_name[$i];
+                $details[$i]['product_id'] = $request->product[$i];
                 $details[$i]['quantity'] = $request->quantity[$i];
                 $details[$i]['total_amount'] = $request->total_amount[$i];
 
             }
 
-            $sell->sell_product()->createMany($details);
+            $sell->product()->sync($details);
 
             DB::commit();
             return "success operations";

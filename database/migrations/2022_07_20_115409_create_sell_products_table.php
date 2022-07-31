@@ -17,11 +17,12 @@ class CreateSellProductsTable extends Migration
 
             $table->bigIncrements('id');
             $table->unsignedBigInteger('invoice_id');
-            $table->string('product_name');
+            $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
             $table->double('total_amount',15,2);
 
             $table->foreign('invoice_id')->references('id')->on('invoices')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });
